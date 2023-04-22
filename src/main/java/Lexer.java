@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+/**
+ * Lexical Analyzer
+ * @author Bella Mester
+ */
 public class Lexer {
     private int line;
     private int pos;

@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Syntax Analyzer
+ * @author Nick Trimmer
+ */
 class Parser {
     private List<Token> source;
     private Token token;

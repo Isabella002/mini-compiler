@@ -106,7 +106,16 @@ public class Lexer {
     }
     Token string_lit(char start, int line, int pos) { // handle string literals
         String result = "";
-        // code here
+        while (getNextChar() != start) {
+            if (this.chr == '\u0000') {
+                error(line, pos, "Message: EOF While Scanning The String Literal");
+            }
+            if (this.chr == '\n') {
+                error(line, pos, "Message: EOL While Scanning The String Literal");
+            }
+            result += this.chr;
+        }
+        getNextChar();
         return new Token(TokenType.String, result, line, pos);
     }
     Token div_or_comment(int line, int pos) { // handle division or comments
@@ -139,6 +148,17 @@ public class Lexer {
 
     char getNextChar() {
         // get next character
+        this.pos++;
+        this.position++;
+        if (this.position >= this.s.length()) {
+            this.chr = '\u0000';
+            return this.chr;
+        }
+        this.chr = this.s.charAt(this.position);
+        if (this.chr == '\n') {
+            this.line++;
+            this.pos = 0;
+        }
         return this.chr;
     }
 

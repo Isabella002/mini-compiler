@@ -88,7 +88,20 @@ public class Lexer {
     Token char_lit(int line, int pos) { // handle character literals
         char c = getNextChar(); // skip opening quote
         int n = (int)c;
-        // code here
+        if (c == '\'') {
+            error(line,pos,"Message: Empty Character Constant");
+        } else if (c == '\\') {
+            c = getNextChar();
+            if (c == 'n') {
+                n = 10;
+            } else {
+                error(line, pos, String.format("Message: Unknown Escape Sequence \\%c", c));
+            }
+        }
+        if (getNextChar() != '\'') {
+            error(line, pos, "Message: Multi-Character Constant");
+        }
+        getNextChar();
         return new Token(TokenType.Integer, "" + n, line, pos);
     }
     Token string_lit(char start, int line, int pos) { // handle string literals

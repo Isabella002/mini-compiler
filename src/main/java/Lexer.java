@@ -120,14 +120,50 @@ public class Lexer {
     }
     Token div_or_comment(int line, int pos) { // handle division or comments
         // code here
-        return getToken();
+        if (getNextChar() != '*') {
+            return new Token(TokenType.Op_divide, "", line, pos);
+        }
+        getNextChar();
+        while (true) {
+            if (this.chr == '\u0000') {
+                error(line, pos, "Message: EOF In Comment");
+            } else if (this.chr == '*') {
+                if (getNextChar() == '/') {
+                    getNextChar();
+                    return getToken();
+                }
+            } else {
+                getNextChar();
+            }
+        }
     }
+
     Token identifier_or_integer(int line, int pos) { // handle identifiers and integers
         boolean is_number = true;
         String text = "";
         // code here
+        while (Character.isAlphabetic(this.chr) || Character.isDigit(this.chr) || this.chr == '_') {
+            text += this.chr;
+            if (!Character.isDigit(this.chr)) {
+                is_number = false;
+            }
+            getNextChar();
+        }
+        if (text.equals("")) {
+            error(line, pos, String.format("identifier_or_integer Unrecognized Character: (%d) %c", (int)this.chr, this.chr));
+        }
+        if (Character.isDigit(text.charAt(0))) {
+            if (!is_number) {
+                error(line, pos, String.format("Invalid Number: %s", text));
+            }
+            return new Token(TokenType.Integer, text, line, pos);
+        }
+        if (this.keywords.containsKey(text)) {
+            return new Token(this.keywords.get(text), "", line, pos);
+        }
         return new Token(TokenType.Identifier, text, line, pos);
     }
+
     Token getToken() {
         int line, pos;
         while (Character.isWhitespace(this.chr)) {
@@ -140,7 +176,28 @@ public class Lexer {
 
         switch (this.chr) {
             case '\u0000': return new Token(TokenType.End_of_input, "", this.line, this.pos);
-            // remaining case statements
+            // Continued Test Cases
+            case '{': getNextChar(); return new Token(TokenType.LeftBrace, "", line, pos);
+            case '}': getNextChar(); return new Token(TokenType.RightBrace, "", line, pos);
+            case '(': getNextChar(); return new Token(TokenType.LeftParen, "", line, pos);
+            case ')': getNextChar(); return new Token(TokenType.RightParen, "", line, pos);
+            case '+': getNextChar(); return new Token(TokenType.Op_add, "", line, pos);
+            case '-': getNextChar(); return new Token(TokenType.Op_subtract, "", line, pos);
+            case '*': getNextChar(); return new Token(TokenType.Op_multiply, "", line, pos);
+            case '%': getNextChar(); return new Token(TokenType.Op_mod, "", line, pos);
+            case ';': getNextChar(); return new Token(TokenType.Semicolon, "", line, pos);
+            case ',': getNextChar(); return new Token(TokenType.Comma, "", line, pos);
+
+            case '/': return div_or_comment(line, pos);
+            case '\'': return char_lit(line, pos);
+
+            case '<': return follow('=', TokenType.Op_lessequal, TokenType.Op_less, line, pos);
+            case '>': return follow('=', TokenType.Op_greaterequal, TokenType.Op_greater, line, pos);
+            case '=': return follow('=', TokenType.Op_equal, TokenType.Op_assign, line, pos);
+            case '!': return follow('=', TokenType.Op_notequal, TokenType.Op_not, line, pos);
+            case '&': return follow('&', TokenType.Op_and, TokenType.End_of_input, line, pos);
+            case '|': return follow('|', TokenType.Op_or, TokenType.End_of_input, line, pos);
+            case '"': return string_lit(this.chr, line, pos);
 
             default: return identifier_or_integer(line, pos);
         }

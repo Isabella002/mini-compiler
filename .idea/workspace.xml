@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a7ac25b6-265d-43ed-8230-0c6749f7127e" name="Changes" comment="Token char_lit">
+    <list default="true" id="a7ac25b6-265d-43ed-8230-0c6749f7127e" name="Changes" comment="Lexer cases added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lexer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Lexer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/LexerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/LexerTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Parser">
+  <component name="RunManager" selected="JUnit.LexerTests.lexerTestStub">
     <configuration name="Lexer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Lexer" />
       <module name="MiniCompiler.main" />
@@ -149,7 +149,11 @@
       <workItem from="1682126522076" duration="66000" />
       <workItem from="1682126607673" duration="1042000" />
       <workItem from="1683499460509" duration="2093000" />
-      <workItem from="1683785251155" duration="2676000" />
+      <workItem from="1683785251155" duration="3011000" />
+      <workItem from="1684206636395" duration="4163000" />
+      <workItem from="1684211921646" duration="611000" />
+      <workItem from="1684256381550" duration="4000" />
+      <workItem from="1684258887515" duration="7221000" />
     </task>
     <task id="LOCAL-00001" summary="Token char_lit">
       <created>1683786620983</created>
@@ -158,7 +162,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683786620983</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="char getNextChar() and Token string_lit update">
+      <created>1683787981858</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1683787981858</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Lexer cases added">
+      <created>1684264197276</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1684264197276</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +196,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Token char_lit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Token char_lit" />
+    <MESSAGE value="char getNextChar() and Token string_lit update" />
+    <MESSAGE value="Lexer cases added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lexer cases added" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

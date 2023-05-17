@@ -1,7 +1,23 @@
 Sequence
-;
 Sequence
 ;
-Prts
-String "Hello, World!\n" 
+Assign
+Identifier count 
+Integer 1 
+While
+Less
+Identifier count 
+Integer 10 
+Sequence
+Prti
+Prti
+Prti
+String "count is: " 
+Identifier count 
+String "\n" 
 ;
+Assign
+Identifier count 
+
+Identifier count 
+Integer 1 
